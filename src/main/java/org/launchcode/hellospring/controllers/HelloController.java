@@ -50,6 +50,8 @@ public class HelloController {
     public String hellowWithPathParam(@PathVariable String name) {
         return "Hello, " + name +"!";
     }
+    //Also note that you can redirect a user by removing the @ResponseBody annotation from the controller method and returning "redirect:/DESIREDPATH"
+
 }
 
 
