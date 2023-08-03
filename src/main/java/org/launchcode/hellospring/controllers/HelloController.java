@@ -40,5 +40,6 @@ public class HelloController {
 
         return "Hello, " + name + "!";
     }
-
+// i did not add this to the correct branch i pushed it to static-response instead of query parameters branch
+    //committing and created the query param branch
 }
