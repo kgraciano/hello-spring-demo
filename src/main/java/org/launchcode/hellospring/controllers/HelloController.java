@@ -2,6 +2,7 @@ package org.launchcode.hellospring.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,7 +29,7 @@ public class HelloController {
 
     //Query parameters
     // Handles request of the form /hello?name=LaunchCode
-    //Path parameters video
+
     //Some controllers can take in parameters in the form of query strings.
     //query strings are URL data, the key-value pairs
     //@RequestParam annotation notifies spring that the name parameter is going to be in the query parameter(end of URL)
@@ -40,5 +41,21 @@ public class HelloController {
 
         return "Hello, " + name + "!";
     }
+//Get requests handlers that accept data other words dynamic
+// Handles request of the form /hello/Launchcode
+// @PathVariable tells spring that this method is looking for a request to /hello/{name}
 
+    @GetMapping("hello/{name}")
+    @ResponseBody
+    public String hellowWithPathParam(@PathVariable String name) {
+        return "Hello, " + name +"!";
+    }
 }
+
+
+
+
+
+
+
+
