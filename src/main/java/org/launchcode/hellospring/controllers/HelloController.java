@@ -52,7 +52,28 @@ public class HelloController {
     }
     //Also note that you can redirect a user by removing the @ResponseBody annotation from the controller method and returning "redirect:/DESIREDPATH"
 
-}
+    //Question from the check your understanding
+    //working with query parameters and the @RequestParam notation
+    @GetMapping("venus")
+    @ResponseBody
+    public String venusSurface(@RequestParam String terrestrial) {
+        if (terrestrial.equals(false)) {
+            return "Venus is gaseous";
+
+        } else {
+            return "Venus is rocky";
+
+        }
+    }
+
+        //Question #2
+        @GetMapping("venus/{orbiter}")
+        @ResponseBody
+        public String venusOrbiter(@PathVariable String orbiter) {
+            return orbiter + " currently orbits Venus.";
+        }
+    }
+
 
 
 
