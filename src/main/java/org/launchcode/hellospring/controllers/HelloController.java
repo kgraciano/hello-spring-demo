@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 // this request will be shown in the root path since that is the default "/" so it will live in the root path
 //@GetMapping
 @Controller
+@ResponseBody
+@RequestMapping("hello") //every single controller method within the class will begin with /hello
 public class HelloController {
 
 //    @GetMapping("hello") //handles request at path /hello
@@ -16,8 +18,9 @@ public class HelloController {
 //    public String hello() {
 //        return "Hello, Spring!";
 //    }
+
+    //now lives at /hello/goodbye
     @GetMapping("goodbye") //handles request at path /goodbye and calls the method goodbye()
-    @ResponseBody
     public String goodbye() {
         return "Goodbye, Spring!";
         //Get request are used only to request data example localhost8080:/goodbye calls the goodbye
@@ -34,8 +37,10 @@ public class HelloController {
     //cannot have 2 different controllers at the same path. first method in this class was commented for the method below to run locally.
 //    @GetMapping("hello")
 //    @ResponseBody
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value="hello")
-    @ResponseBody
+
+    //now lives at /hello after value="hello" has been deleted from @Requestingmapping below
+    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
+
     public String helloWithQueryParam(@RequestParam String name) {
 
         return "Hello, " + name + "!";
@@ -44,8 +49,8 @@ public class HelloController {
 // Handles request of the form /hello/Launchcode
 // @PathVariable tells spring that this method is looking for a request to /hello/{name}
 
-    @GetMapping("hello/{name}")
-    @ResponseBody
+    //Now lives at hello/{name} so what ever the path variable is !
+    @GetMapping("{name}")
     public String hellowWithPathParam(@PathVariable String name) {
         return "Hello, " + name +"!";
     }
@@ -54,7 +59,6 @@ public class HelloController {
     //Question from the check your understanding
     //working with query parameters and the @RequestParam notation
     @GetMapping("venus")
-    @ResponseBody
     public String venusSurface(@RequestParam String terrestrial) {
         if (terrestrial.equals(false)) {
             return "Venus is gaseous";
@@ -68,14 +72,14 @@ public class HelloController {
         //Question #2
     //@Path parameters
         @GetMapping("venus/{orbiter}")
-        @ResponseBody
         public String venusOrbiter(@PathVariable String orbiter) {
             return orbiter + " currently orbits Venus.";
         }
 
         //Form submission
+
+    //now lives /hello/form
         @GetMapping("form")
-        @ResponseBody
         public String helloForm() {
          return "<html>" +
                 "<body>" +
