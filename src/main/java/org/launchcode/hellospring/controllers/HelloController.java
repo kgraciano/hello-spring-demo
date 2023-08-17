@@ -24,74 +24,27 @@ public class HelloController {
         //controller method and returns "Goodbye, Spring!"
     }
 
-    //Query parameters
-    // Handles request of the form /hello?name=LaunchCode
 
-    //Some controllers can take in parameters in the form of query strings.
-    //query strings are URL data, the key-value pairs
-    //@RequestParam annotation notifies spring that the name parameter is going to be in the query parameter(end of URL)
-    //a dynamic response will take a piece of data from the request and give a different response based on the value of that data. the example below shows us one way.
-    //cannot have 2 different controllers at the same path. first method in this class was commented for the method below to run locally.
-//    @GetMapping("hello")
-//    @ResponseBody
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value="hello")
     @ResponseBody
     public String helloWithQueryParam(@RequestParam String name) {
 
         return "Hello, " + name + "!";
     }
-//Get requests handlers that accept data other words dynamic
-// Handles request of the form /hello/Launchcode
-// @PathVariable tells spring that this method is looking for a request to /hello/{name}
+
 
     @GetMapping("hello/{name}")
     @ResponseBody
     public String hellowWithPathParam(@PathVariable String name) {
         return "Hello, " + name +"!";
     }
-    //Also note that you can redirect a user by removing the @ResponseBody annotation from the controller method and returning "redirect:/DESIREDPATH"
-
-    //Question from the check your understanding
-    //working with query parameters and the @RequestParam notation
-    @GetMapping("venus")
-    @ResponseBody
-    public String venusSurface(@RequestParam String terrestrial) {
-        if (terrestrial.equals(false)) {
-            return "Venus is gaseous";
-
-        } else {
-            return "Venus is rocky";
-
-        }
-    }
-
-        //Question #2
-    //@Path parameters
-        @GetMapping("venus/{orbiter}")
-        @ResponseBody
-        public String venusOrbiter(@PathVariable String orbiter) {
-            return orbiter + " currently orbits Venus.";
-        }
 
         //Form submission
         @GetMapping("form")
-        @ResponseBody
         public String helloForm() {
-         return "<html>" +
-                "<body>" +
-                "<form action='hello' method='post'>" + //submit a request to /hello
-                "<input type='text' name='name'>" +
-                "<input type='submit' value='Greet Me!'>" +
-                "</form>" +
-                "</body>" +
-                "</html>";
+        return "form";
 
-         //why exactly does this work?
-            //action='hello' refers back to the handler method at path hello?
-        // using method='post' it goes to the /hello path without revealing the name in URL localhost8080:/hello did not make a query string
-            //using method='get' the URL shows the name parameters. localhost:8080/hello?name=Java
-            //always need a controller method that can handle the form submission
-            //@RequestMapping can annotate a method to respond to both GET and POST requests.
+
         }
 
 
